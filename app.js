@@ -12,6 +12,7 @@ async function mockSearchApi(term) {
 
 const inputElement = document.getElementById('searchInput');
 const resultsElement = document.getElementById('results');
+const selectedElement = document.getElementById('selected');
 
 fromEvent(inputElement, 'input')
     .pipe(
@@ -30,7 +31,7 @@ fromEvent(inputElement, 'input')
             resultsElement.innerHTML = results.map((item) => {
                 const regex = new RegExp(`(${inputElement.value})`, 'gi');
                 const highlightedName = item.name.common.replace(regex, '<b style="color:red">$1</b>');
-                return `<li class="list-none">${highlightedName}</li>`;
+                return `<li class="list-none cursor-pointer">${highlightedName}</li>`;
             }).join('');
         },
         error: (error) => {
@@ -38,5 +39,32 @@ fromEvent(inputElement, 'input')
         },
         complete: () => {
             console.log('Search complete');
+        },
+    });
+
+fromEvent(resultsElement, 'click')
+    .pipe(
+        map((event) =>{
+            if(event.target.tagName === 'LI'){
+                return event.target.textContent;
+            } else if(event.target.tagName === 'B'){
+                return event.target.parentElement.textContent;
+            } else {
+                return '';
+            }
+        }),
+        delay(100)
+    )
+    .subscribe({
+        next: (selected) => {
+            selectedElement.textContent = selected;
+            resultsElement.innerHTML = '';
+            inputElement.value = '';
+        },
+        error: (error) => {
+            console.error('Error:', error);
+        },
+        complete: () => {
+            console.log('Selection complete');
         },
     });

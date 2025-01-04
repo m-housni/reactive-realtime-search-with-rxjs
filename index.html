@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RxJS Search Example</title>
-  <!-- Include RxJS via CDN or your build pipeline -->
-  <script src="https://unpkg.com/rxjs@7/dist/bundles/rxjs.umd.min.js"></script>
+    <title>RxJS Search Example</title>
+    <!-- Include RxJS via CDN or your build pipeline -->
+    <script src="https://unpkg.com/rxjs@7/dist/bundles/rxjs.umd.min.js"></script>
+    <!-- Include Tailwind CSS via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-  <h1>RxJS Simple Search</h1>
-  <input id="searchInput" type="text" placeholder="Type to search..." />
-  <div id="results"></div>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded shadow-md w-full max-w-md ">
+        <h1 class="text-xl font-bold mb-4 text-center">Start typing the name of a country</h1>
+        <input id="searchInput" type="text" placeholder="Type here ..." class="w-full p-2 border border-gray-300 rounded mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        <div id="results"></div>
+    </div>
 
-  <script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

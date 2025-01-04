@@ -30,7 +30,7 @@ fromEvent(inputElement, 'input')
             resultsElement.innerHTML = results.map((item) => {
                 const regex = new RegExp(`(${inputElement.value})`, 'gi');
                 const highlightedName = item.name.common.replace(regex, '<b style="color:red">$1</b>');
-                return `<li>${highlightedName}</li>`;
+                return `<li class="list-none">${highlightedName}</li>`;
             }).join('');
         },
         error: (error) => {
